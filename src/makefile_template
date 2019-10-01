@@ -1,3 +1,4 @@
 INC=-I../../include
-HEADER=../../include/DC/defer/defer.hpp \
-			 ../../include/DC/utils/macro.hpp
+HEADER=../../include/DC/defer.hpp \
+			 ../../include/DC/macro/file.hpp \
+			 ../../include/DC/utils/table.hpp

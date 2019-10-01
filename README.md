@@ -10,27 +10,28 @@
 project
 │   README.md
 │   .gitignore    
-│
+│   ...
 └───include/DC
-│   │
-│   └───defer
-│       │   defer.hpp
+│   │defer.hpp
+│   │...
+│   └───macro
+│       │   file.hpp
 │       │   ...
 │   
 └───src
-    │   
+    │   makefile_template 
     └───1
         │   main.cpp
         │   makefile
         │   ...
 ```
-## include/DC目录内容
-### defer
-	defer.hpp:利用lambda模仿golang defer
-### utils
+## include/DC/
+### defer.hpp
+	利用lambda模仿golang defer
+### utils/
 	自定义的重复性高的代码工具
-
-	macro.hpp:F_IO文件操作宏的定义(此宏用在每个文件的开始,定义ifstream为in,ofstream为out)
-## src目录内容
-### 1
+### macro/
+	file.hpp:F_IO文件操作宏的定义(此宏用在每个文件的开始,定义ifstream为in,ofstream为out)
+## src/
+### 1/
 	矩阵链乘法

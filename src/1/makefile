@@ -1,6 +1,6 @@
 include ../makefile_template
 run:main.cpp $(HEADER)
-	$(CXX) main.cpp $(INC) -o run
+	$(CXX) main.cpp -g $(INC) -o run
 .PHONY:
 	clean
 clean:
