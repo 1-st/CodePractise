@@ -1,15 +1,10 @@
 # include <fstream>
 # include <iostream>
 # include <defer/defer.hpp>
+# include <utils/macro.hpp>
 // 矩阵链乘法
 int main(){
-	std::ifstream input("input.dat"); 
-	std::ofstream output("output.dat");
-	defer [&output,&input](){
-		output.close();
-		input.close();
-	};
-
+  F_IO
 	char bufc;
 	while(true){
 		bufc = input.get();
