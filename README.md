@@ -26,7 +26,11 @@ project
 ```
 ## include目录内容
 ### defer
-	C++利用lambda模仿golang defer
+	defer.hpp:利用lambda模仿golang defer
+### utils
+	自定义的重复性高的代码工具
+
+	macro.hpp:F_IO文件操作宏的定义(此宏用在每个文件的开始,定义ifstream为in,ofstream为out)
 ## src目录内容
 ### 1
 	矩阵链乘法
