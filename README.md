@@ -27,6 +27,6 @@ project
 ## include目录内容
 ### defer
 	C++利用lambda模仿golang defer
-##src目录内容
+## src目录内容
 ### 1
 	矩阵链乘法

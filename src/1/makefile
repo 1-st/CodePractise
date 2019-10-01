@@ -1,7 +1,6 @@
-run:main.o
-	g++ -o run main.o
-main.o:main.cpp ../include/defer.hpp
-
+include ../makefile_template
+run:main.cpp $(HEADER)
+	$(CXX) main.cpp $(INC) -o run
 .PHONY:
 	clean
 clean:

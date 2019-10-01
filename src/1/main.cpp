@@ -1,22 +1,21 @@
 # include <fstream>
 # include <iostream>
-# include "../include/defer.hpp"
+# include <defer/defer.hpp>
 // 矩阵链乘法
 int main(){
-	std::ifstream ifs("input.dat"); 
-	std::ofstream ofs("output.dat");
-	defer [&ofs,&ifs](){
-		std::cout<<"one";
-		ofs.close();
-		ifs.close();
+	std::ifstream input("input.dat"); 
+	std::ofstream output("output.dat");
+	defer [&output,&input](){
+		output.close();
+		input.close();
 	};
 
 	char bufc;
 	while(true){
-		bufc = ifs.get();
-		if(ifs.eof())
+		bufc = input.get();
+		if(input.eof())
 			break;
-		ofs<<bufc;
+		output<<bufc;
 	}
 	return 0;
 }
