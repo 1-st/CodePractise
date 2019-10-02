@@ -1,7 +1,0 @@
-edit:pow.cc
-	g++ -o eee pow.cc -lssl -lcrypto
-.PHONY:clean
-
-clean:
-	rm eidt 
-
