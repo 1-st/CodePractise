@@ -20,6 +20,7 @@
 struct mytable :public table<int>{
 	int * p;
 	unsigned long p_size;
+	//按p数组初始化
 	mytable(std::vector<int>& v_p)
 		:table(v_p.size()-1,v_p.size()-1),p_size(v_p.size())
 	{
