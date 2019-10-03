@@ -34,3 +34,6 @@ run
 
 # emacs
 *~
+
+# tests
+*text.cpp
