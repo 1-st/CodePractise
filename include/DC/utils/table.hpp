@@ -19,13 +19,13 @@ struct table {
   }
   bool clear() {
     if (arr == nullptr || X == 0 || Y == 0) return false;
-    X = 0;
-    Y = 0;
     for (unsigned long i = 0; i < X; i++) {
       delete[] arr[i];
     }
     delete[] arr;
     arr = nullptr;
+		X=0;
+		Y=0;
     return true;
   }
   ~table() { clear(); }
