@@ -25,7 +25,7 @@ struct A : public table<int> {
       p[i] = v_p[i];
     }
   }
-  void calculate(void) {
+  void calculate() {
     for (unsigned long i = 0; i < this->X; i++) {
       for (unsigned long j = 0; j < this->Y; j++) {
 	this->arr[i][j] = 23;
