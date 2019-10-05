@@ -31,10 +31,11 @@ project
 ### utils/
 	自定义的重复性高的代码工具
 	table.hpp(简易的二维数组类)
+	type.hpp(自己定义感觉顺眼的类型名)
 ### macro/
 	file.hpp:F_IO文件操作宏的定义(此宏用在每个文件的开始,定义ifstream为in,ofstream为out)
 ## src/
 ### 1/
-	矩阵链乘法(我也不知道为什么暂时鸽鸽鸽)
+	矩阵链乘
 ### 2/
 	比特币PoW算法的简单c语言模仿(需要openssl头文件)

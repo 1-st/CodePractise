@@ -6,17 +6,24 @@ struct table {
   unsigned long Y = 0;
   T** arr = nullptr;
   explicit table() = default;
-  explicit table(unsigned long x, unsigned long y) { set(x, y); }
-  bool set(unsigned long x, unsigned long y) {
+  explicit table(unsigned long x, unsigned long y) { setSize(x, y); }
+  bool setSize(unsigned long x, unsigned long y) {
     if (arr != nullptr || X != 0 || Y != 0) return false;
     arr = new T*[x];
     for (int i = 0; i < x; i++) {
-      arr[i] = new T[y];
+      arr[i] = new T[y];//未分配
     }
     X = x;
     Y = y;
     return true;
   }
+	void setValue(T value){
+		for(int i=0;i<X;i++){
+			for(int j = 0;j<Y;j++){
+				arr[i][j]=value;
+			}
+		}
+	}
   bool clear() {
     if (arr == nullptr || X == 0 || Y == 0) return false;
     for (unsigned long i = 0; i < X; i++) {
