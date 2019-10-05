@@ -1,8 +1,8 @@
-#include <openssl/sha.h>
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <openssl/sha.h>
 //将无符号字符类型定义为byte(0-255)(uint8)
 typedef unsigned char byte;
 //定义挖矿的难度(256BitHash前置0位数)
@@ -35,9 +35,9 @@ void PrintByteBin(byte *hash, int len) {
     // _print_hash_b(hash[i]);
     for (int j = 7; j >= 0; j--) {
       if (hash[i] & (1 << j)) {
-	printf("1");
+        printf("1");
       } else {
-	printf("0");
+        printf("0");
       }
     }
   }
@@ -68,7 +68,7 @@ bool ByteBiggerOrEqual(byte *me, byte *other, int len) {
       return true;
     }
   }
-  return true;  //等于
+  return true; //等于
 }
 void Block_PrepareData(Block *b, byte *hash_ret) {
   byte temp[32 + 32 + 8]{};
@@ -81,7 +81,7 @@ void Block_PrepareData(Block *b, byte *hash_ret) {
 }
 void Block_RunPoW(Block *b) {
   byte targetHash[32];
-  {  //产生目标Hash
+  { //产生目标Hash
     int emptyByteCount = Hard / 8;
     int remainderBits = Hard - emptyByteCount;
     for (int i = 0; i < emptyByteCount; i++) {
@@ -134,4 +134,3 @@ int main() {
   Block_RunPoW(&b);
   return 0;
 }
-
