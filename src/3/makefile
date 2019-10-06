@@ -5,4 +5,4 @@ run:main.cpp $(HEADER)
 .PHONY:
 	clean
 clean:
-	rm run main.o
+	rm run
