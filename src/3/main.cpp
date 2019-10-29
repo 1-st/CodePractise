@@ -1,4 +1,4 @@
-#include <DC/utils/table.hpp>
+#include <DC/utils/Table.hpp>
 #include <DC/macro/file.hpp>
 #include <DC/defer.hpp>
 #include <DC/utils/type.hpp>
@@ -22,10 +22,10 @@ int main(){
 		}
 		(*target).push_back(buf);
 	}
-	table<int> len(X.size()+1,Y.size()+1);
-	table<std::string> hint(X.size()+1,Y.size()+1);
-	len.setValue(0);
-	hint.setValue(" ");
+	Table<int> len(X.size()+1,Y.size()+1);
+	Table<std::string> hint(X.size()+1,Y.size()+1);
+	len.setValueAll(0);
+	hint.setValueAll(" ");
 	for(uint64 i = 1;i<X.size()+1;i++){
 		for(uint64 j = 1;j<Y.size()+1;j++){
 			if(X[i-1]==Y[j-1]){

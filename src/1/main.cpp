@@ -1,6 +1,6 @@
 #include <DC/defer.hpp>
 #include <DC/macro/file.hpp>
-#include <DC/utils/table.hpp>
+#include <DC/utils/Table.hpp>
 #include <DC/utils/type.hpp>
 #include <iomanip>
 #include <iostream>
@@ -12,13 +12,13 @@
 // c:cost
 // d:division
 
-//继承table,添加我们需要的方法
-struct A : public table<int> {
+//继承Table,添加我们需要的方法
+struct A : public Table<int> {
   int *p;
   uint64 p_size;
   //按p数组初始化
   A(std::vector<int> &v_p)
-      : table(v_p.size() - 1, v_p.size() - 1), p_size(v_p.size()) {
+      : Table(v_p.size() - 1, v_p.size() - 1), p_size(v_p.size()) {
     this->p = new int[p_size];
     for (uint64 i = 0; i < p_size; i++) {
       this->p[i] = v_p[i];
@@ -87,7 +87,7 @@ int main() {
     p.push_back(buf);
   }
   A m(p);
-  m.setValue(0);
+  m.setValueAll(0);
   m.calculate();
   m.print(out);
   return 0;

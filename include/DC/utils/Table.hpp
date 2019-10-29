@@ -1,11 +1,11 @@
 #ifndef _TABLE_H_
 #define _TABLE_H_
-template <class T> struct table {
+template <class T> struct Table {
   unsigned long X = 0;
   unsigned long Y = 0;
   T **arr = nullptr;
-  explicit table() = default;
-  explicit table(unsigned long x, unsigned long y) { setSize(x, y); }
+  explicit Table() = default;
+  explicit Table(unsigned long x, unsigned long y) { setSize(x, y); }
   bool setSize(unsigned long x, unsigned long y) {
     if (arr != nullptr || X != 0 || Y != 0)
       return false;
@@ -17,14 +17,14 @@ template <class T> struct table {
     Y = y;
     return true;
   }
-  void setValue(T value) {
+  void setValueAll(T value) {
     for (int i = 0; i < X; i++) {
       for (int j = 0; j < Y; j++) {
         arr[i][j] = value;
       }
     }
   }
-  bool clear() {
+  bool clear() {//before setSize
     if (arr == nullptr || X == 0 || Y == 0)
       return false;
     for (unsigned long i = 0; i < X; i++) {
@@ -36,7 +36,7 @@ template <class T> struct table {
     Y = 0;
     return true;
   }
-  ~table() { clear(); }
+  ~Table() { clear(); }
   //注意不返回自己,所以只有二重下标运算
   T *operator[](const unsigned long &n) { return arr[n]; }
 };
