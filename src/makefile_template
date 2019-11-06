@@ -1,6 +1,7 @@
 INC=-I../../include
 HEADER=../../include/DC/defer.hpp \
 			 ../../include/DC/macro/file.hpp \
-			 ../../include/DC/utils/table.hpp \
+			 ../../include/DC/utils/Table.hpp \
 			 ../../include/DC/utils/type.hpp  \
-			 ../../include/DC/BitMap.hpp
+			 ../../include/DC/BitMap.hpp  \
+			 ../../include/DC/utils/rand.hpp
