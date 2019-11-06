@@ -4,7 +4,6 @@
 每个实现对应一个目录(以数字为标号)
 
 ...
-部分会给出golang和cpp两个版本
 
 ```
 project
@@ -34,10 +33,13 @@ project
 	type.hpp(自己定义感觉顺眼的类型名)
 ### macro/
 	file.hpp:F_IO文件操作宏的定义(此宏用在每个文件的开始,定义ifstream为in,ofstream为out)
+### BitMap.hpp
+	一个处理bmp位图的玩具库
 ## src/
 ### 1/
 	矩阵链乘
 ### 2/
-	比特币PoW算法的c/c++语言模仿(需要openssl头文件)
+	PoW的c语言写意代码(需要openssl头文件)
 ### 3/
 	求最长字串(LCS),保存了所有状态
+## 4/
