@@ -31,6 +31,11 @@ class Individual
 	 */
 	T fitness;
 	/*
+	 *个体的基因形
+	 *
+	 */
+	void * gene;
+	/*
 	 *判断是否是最优解
 	 *
 	 */
@@ -45,11 +50,11 @@ class Individual
 	 *交叉函数,产生子类
 	 *
 	 */
-	virtual Individual xOverFNs(Individual &,int xOverRate);
+	virtual Individual * xOverFNs(Individual &,int xOverRate);
 	/*
 	 *变异函数
 	 */
-	virtual void mutFNs();
+	virtual Individual * mutFNs();
 	/*
 	 *初始化个体
 	 */
@@ -79,7 +84,7 @@ struct Population
 	 *初始种群
 	 *
 	 */
-	std::unique_ptr<std::vector<Individual<T>>> pop = nullptr ;
+	std::unique_ptr<std::vector<Individual<T>*>> pop = nullptr ;
 	/*
 	 *种群总大小
 	 *
@@ -100,8 +105,13 @@ struct Population
 		this->pop = new std::vector<Individual<T>>[size]{};
 		MaxSize = size;
 		for(int i =0;i<pop->size();i++){
-				pop[i].init();
-				pop[i].genFitness();
+				(*pop)[i].init();
+				(*pop)[i].genFitness();
+		}
+	}
+	~Population(){
+		for(int i = 0;i<MaxSize;i++){
+			delete (*pop)[i];
 		}
 	}
 	/*
@@ -130,7 +140,7 @@ struct Population
 	bool checkBest(){
 		bool end = false;
 		for(int i=0;i<MaxSize;i++){
-			if(pop[i].isBest){
+			if((*pop)[i]->isBest()){
 				end = true;
 				break;
 			}
@@ -145,7 +155,7 @@ struct Population
 		int createSum = MaxSize-pop->size();
 		assert(createSum<MaxSize);
     unsigned seed = std::chrono::system_clock::now ().time_since_epoch ().count ();
-    std::shuffle (pop.begin (), pop.end (), std::default_random_engine (seed));
+    std::shuffle (pop->begin (), pop->end (), std::default_random_engine (seed));
 		int cur = 0;
 		int curPlus1;
 		int originSize = pop->size();
@@ -155,7 +165,7 @@ struct Population
 			}else{
 				curPlus1 = cur;
 			}
-			pop->push_back(pop[cur].xoverFNs(pop[curPlus1]).mutFNs());
+			pop->push_back((*pop)[cur].xoverFNs((*pop)[curPlus1])->mutFNs());
 			if(cur>=originSize){
 				cur=0;
 			}else{
@@ -174,13 +184,14 @@ struct Population
 		};
 		std::sort(pop->begin(),pop->end(),sortFun);
 		for(int i = 0;i < killNum;i++){
+			delete pop->end();
 			pop->pop_back();
 		}
 		assert(pop->size()==MaxSize-killNum);
 	}
 	void PrintAll(){
 		for(uint64 i=0;i<pop->size();i++){
-			pop[i].print();
+			(*pop)[i].print();
 		}
 	};
 };
