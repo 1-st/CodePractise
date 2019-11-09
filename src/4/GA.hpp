@@ -24,45 +24,26 @@ template <typename T>
 class Individual
 {
 	public:
-	/*
-	 *
-	 *个体的适应度
-	 *
-	 */
+
 	T fitness;
-	/*
-	 *个体的基因形
-	 *
-	 */
+	
 	void * gene;
-	/*
-	 *判断是否是最优解
-	 *
-	 */
+
+	/*判断是否是最优解*/
 	virtual bool isBest();
-	/*
-	 *
-	 *得到个体的适应度,用于排序
-	 *
-	 */
+
 	virtual void genFitness();
-	/*
-	 *交叉函数,产生子类
-	 *
-	 */
+
+	/*交叉函数,产生子类*/
 	virtual Individual * xOverFNs(Individual &,int xOverRate);
-	/*
-	 *变异函数
-	 */
+
+	/*变异函数*/
 	virtual Individual * mutFNs();
-	/*
-	 *初始化个体
-	 */
+
+	/*初始化个体*/
 	virtual void init();
-	/*
-	 *打印个体值
-	 *
-	 */
+
+	/*打印个体值*/
 	virtual void print();
 };
 
@@ -75,31 +56,19 @@ class Individual
 template <class T>
 struct Population
 {
-	/*
-	 *每次迭代存活的比例
-	 *
-	 */
+	/*每次迭代存活的比例*/
 	int SurviveRate = 100;
-	/*
-	 *初始种群
-	 *
-	 */
+
+	/*种群*/
 	std::unique_ptr<std::vector<Individual<T>*>> pop = nullptr ;
-	/*
-	 *种群总大小
-	 *
-	 */
+
+	/*种群最大大小*/
 	int64 MaxSize = 0;
-	/*
-	 *
-	 *种群适应度
-	 *
-	 */
+
+	/*种群适应度*/
 	std::unique_ptr<std::vector<T>>  fitness = nullptr;
-	/*
-	 *构造函数,T是适应度的类型
-	 *
-	 */
+
+	/*构造函数,T是适应度的类型*/
 	explicit Population<T>(int64 size,int64 surviveRate){
 		SurviveRate = surviveRate;
 		this->pop = new std::vector<Individual<T>>[size]{};
@@ -114,10 +83,8 @@ struct Population
 			delete (*pop)[i];
 		}
 	}
-	/*
-	 *迭代,返回迭代的次数
-	 *
-	 */
+
+	/*迭代,返回迭代的次数*/
 	int64 Iter(){
 		int64 count = 0;
 		while(true){
@@ -133,10 +100,8 @@ struct Population
 		}
 		return count;
 	}
-	/*
-	 *检查种群中是否有满足要求的个体
-	 *
-	 */
+
+	/*检查种群中是否有满足要求的个体*/
 	bool checkBest(){
 		bool end = false;
 		for(int i=0;i<MaxSize;i++){
@@ -147,10 +112,8 @@ struct Population
 		}
 		return end;
 	}
-	/*
-	 *产生新个体
-	 *
-	 */
+
+	/*产生新个体*/
 	void Repr(){
 		int createSum = MaxSize-pop->size();
 		assert(createSum<MaxSize);
@@ -173,10 +136,7 @@ struct Population
 			}
 		}
 	}
-	/*
-	 *1~100
-	 *
-	 */
+	/*选择*/
 	void select(){
 		int killNum = MaxSize*(100-SurviveRate)/100;
 		auto sortFun = [](T a,T b){
