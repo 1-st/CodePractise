@@ -39,3 +39,5 @@ run
 *test.cpp
 
 .idea
+# cmake
+cmake-build*
