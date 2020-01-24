@@ -1,7 +1,6 @@
-INC=-I../../include
-HEADER=../../include/DC/defer.hpp \
-			 ../../include/DC/macro/file.hpp \
-			 ../../include/DC/utils/Table.hpp \
-			 ../../include/DC/utils/type.hpp  \
-			 ../../include/DC/BitMap.hpp  \
-			 ../../include/DC/utils/rand.hpp
+LIBDIR:= ../../lib/code_practise
+INC=-I../../lib
+HEADER= $(LIBDIR)/utils/defer.hpp \
+			  $(LIBDIR)/macro/file.hpp \
+			  $(LIBDIR)/utils/table.hpp \
+			  $(LIBDIR)/utils/rand.hpp
