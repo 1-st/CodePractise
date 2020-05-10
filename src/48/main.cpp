@@ -1,53 +1,64 @@
 #include <iostream>
 #include <vector>
 #include <set>
+#include <unordered_map>
 
 using namespace std;
-
 
 class Solution {
 public:
     vector<int> findSubstring(string s, vector<string>& words) {
-        vector<int> res{};
-        if(s.length()==0||words.empty()){
-            return res;
-        }
-        multiset<string> wordSet{};
-        multiset<string> matchedSet{};
-        int count = 0;
-        int wordLength = words[0].length();
-        for(const auto& i:words){
-            wordSet.insert(i);
-            count ++;
-        }
-        for(int i=0;i<s.length()-wordLength*count+1;i++){
-            int matchedCount = 0;
-            int p = i;
-            while(p<s.length()&&matchedCount<count){
-                string next = s.substr(p,wordLength);
-                if(wordSet.count(next)>matchedSet.count(next)){
-                    matchedCount++;
-                    matchedSet.insert(next);
-                    p+=wordLength;
-                }else{
-                    matchedSet.clear();
-                    break;
+        //特殊情况直接排除
+        if(s.empty()||words.empty())return {};
+        //存放结果的数组
+        vector<int> result;
+        //单词数组中的单词的大小，个数，以及总长度
+        int one_word=words[0].size();
+        int word_num=words.size();
+        int all_len=one_word*word_num;
+        //建立单词->单词个数的映射
+        unordered_map<string,int> m1;
+        for(const auto& w:words)m1[w]++;
+        for(int i=0;i<one_word;++i)
+        {
+            //left和rigth表示窗口的左右边界，count用来统计匹配的单词个数
+            int left=i,right=i,count=0;
+            unordered_map<string,int>m2;
+            //开始滑动窗口
+            while(right+one_word<=s.size())
+            {
+                //从s中提取一个单词拷贝到w
+                string w=s.substr(right,one_word);
+                right+=one_word;//窗口右边界右移一个单词的长度
+                if(m1.count(w)==0){//此单词不在words中，表示匹配不成功,然后重置单词个数、窗口边界、以及m2
+                    count=0;
+                    left=right;
+                    m2.clear();
+                }
+                else{//该单词匹配成功，添加到m2中
+                    m2[w]++;
+                    count++;
+                    while(m2.at(w)>m1.at(w))//一个单词匹配多次，需要缩小窗口，也就是left右移
+                    {
+                        string t_w=s.substr(left,one_word);
+                        count--;
+                        m2[t_w]--;
+                        left+=one_word;
+                    }
+                    if(count==word_num)result.push_back(left);
                 }
             }
-            if(matchedCount == count){
-                res.push_back(i);
-                matchedSet.clear();
-            }
         }
-        return res;
+        return result;
     }
 };
 
 int main() {
     Solution s{};
     vector<string> words{};
-    words.emplace_back("a");
-    words.emplace_back("a");
-    s.findSubstring("aaa",words);
+    words.emplace_back("aa");
+    words.emplace_back("aa");
+    words.emplace_back("aa");
+    s.findSubstring("aaaaaaaa",words);
     return 0;
 }
